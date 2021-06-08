@@ -1,0 +1,93 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
+    <link rel="stylesheet" href="{% static 'css/garden.css' %}">
+    {% block title %}<title>Fancy Plants</title>{% endblock %}
+</head>
+
+
+
+<div class="big_box">
+
+    <nav class="sticky">
+        <div class="list-inline">
+            <div class="sticky1">{% if user.is_authenticated %}
+                <h1><a class="logo" href="/">HOLY SHIT GARDENS!</a></h1>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                <h1><a class="logo" href="/home">Fuckin' Plants!</a></h1>
+                {% endif %}</div>
+
+            <div class="sticky2">{% if user.is_authenticated %}
+                <p>new task
+                {% include './garden/icons/plus.svg' %}</p>
+                {% endif %}</div>
+
+            <div class="sticky3">{% if user.is_authenticated %}
+                <a href='/accounts/logout'>logout
+                {% include './garden/icons/arrow-left.svg' %}</a>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                <a href='/accounts/login'>login{% include './garden/icons/arrow-right.svg' %}</a>
+                {% endif %}</div>
+        </div>
+    </nav>
+
+
+<div class="big_middle_box">
+    <div class="column1">
+    <div class="left_sidebar"> 
+                
+                
+                    <div class="pic"><img src="{% static 'images/taskimage.jpeg' %}" alt="image"></div>
+                
+                
+                    <div class="link">{% if user.is_authenticated %}
+                        <p>
+                        {{ request.user }}'s tasks</p>
+                        {% endif %}
+                        {% if not user.is_authenticated %}
+                        <a href='/accounts/login'>login{% include './garden/icons/arrow-right.svg' %}</a>
+                        {% endif %}</div>
+                
+                
+                    <div class="link">{% if user.is_authenticated %}
+                        <p>tasks by date</p>
+                        {% endif %}</div>
+                
+                
+                    <div class="link">{% if user.is_authenticated %}
+                        <p>tasks by user</p>
+                        {% endif %}</div>
+                
+                
+                    <div class="link">{% if user.is_authenticated %}
+                        <p>tasks by done</p>
+                        {% endif %}</div>
+                
+                </div>
+                </div>
+    <div class="column2">      
+    <div class="right_body">
+        <main>
+        {% block content %}
+        {% endblock %}
+        </main>
+    </div>
+    </div>
+</div>
+<!-- <div class="big_bottom">footer maybe</div> -->
+</div>
+
+
+
+
+
+</html>
